@@ -13,7 +13,7 @@ const App = () => {
   console.log(originalURL);
   return (
     <div>
-      <h1>URL Shortner</h1>
+      <h1>URL Shortener</h1>
           <form onSubmit={handleSubmit}>
             <label>Enter your original URL here:</label>
             <input type='text' name="originalUrl"></input>
