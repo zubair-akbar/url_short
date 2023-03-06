@@ -1,6 +1,6 @@
-const express = require('express')
+import express from 'express';
+import cors from 'cors';
 const app = express()
-var cors = require('cors')
 const PORT = 3001;
 
 app.use(cors())
