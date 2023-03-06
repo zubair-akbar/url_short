@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 
 const App = () => {
 
   const [originalURL, setOriginalURL] = useState('')
   const [customURL, setCustomURL] = useState('')
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setOriginalURL(e.target.originalUrl.value)
     setCustomURL(e.target.customUrl.value)
