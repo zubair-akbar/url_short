@@ -9,6 +9,14 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/short_url/urls', function(req, res) {
+  res.status(200).send('routing through URL');
+});
+
+app.post('/short_url/urls', function(req, res) {
+  res.status(200).send('routing through URL');
+});
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
