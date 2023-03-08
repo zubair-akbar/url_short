@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const App = () => {
 
@@ -10,19 +10,22 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setOriginalUrl(e.target.originalUrl.value)
-    setCustomURL(e.target.customUrl.value)
+    setOriginalUrl(e.target.originalUrlElement.value)
+    setCustomURL(e.target.customUrlElement.value)
 
     try {
-      const urlPattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
-      if (!urlPattern.test(originalUrl)) {
-        throw new Error('Invalid URL');
+      const urlPattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+      if (!urlPattern.test(e.target.originalUrlElement.value)) {
+        throw new Error("Oops, that link didn't work");
+      } else {
+        setErrorState('')
+        setLoadState(true)
+        shortUrlHash()
       }
     } catch (error) {
       setErrorState(error.message);
+
     }
-    setLoadState(true)
-    shortUrlHash()
   }
 
   const shortUrlHash = () => {
@@ -39,10 +42,10 @@ const App = () => {
       <h1>LinkDwarf</h1>
           <form onSubmit={handleSubmit}>
             <label>Enter your original URL here:</label>
-            <input type='text' name="originalUrl"></input>
+            <input type='text' name="originalUrlElement"></input>
             <br/>
             <label>Or try your own custom shortened URL </label>
-            <input type='text' name='customUrl'></input>
+            <input type='text' name='customUrlElement'></input>
             <br/>
             <button type="submit">Submit</button>
           </form>
