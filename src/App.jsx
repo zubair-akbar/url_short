@@ -28,6 +28,16 @@ const App = () => {
     }
   }
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(shortUrl)
+    .then(() => {
+      alert(`Copied to clipboard: linkdwarf/${shortUrl}`);
+    })
+    .catch((error) => {
+      console.error(`Failed to copy: ${error}`);
+    });
+  }
+
   const shortUrlHash = () => {
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let shortUrl = '';
@@ -48,13 +58,16 @@ const App = () => {
             <label>Or try your own custom shortened URL </label>
             <input type='text' name='customUrlElement'></input>
             <br/>
-            <button type="submit">Submit</button>
+            <Button type="submit">Submit</Button>
           </form>
           {errorState && (
             <div className="error">{errorState}</div>
           )}
           {loadState && !errorState &&
-            <div>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl}</a><br/>✧♡(◕‿◕✿)</div>
+            <div>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
+            <Button onClick={handleCopy}>Copy</Button><br/>
+            ✧♡(◕‿◕✿)
+            </div>
           }
     </AppWrapper>
   )
@@ -84,6 +97,24 @@ const AppWrapper = styled.div`
   background-color: #AABA9E;
   height: 100vh;
 `;
+
+const Button = styled.button`
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #6E6D70;
+  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #DFDEDF;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+&:focus {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  outline: 0;
+}
+`;
+
+
 
 
 
