@@ -25,7 +25,7 @@ const App = () => {
       } else {
         setErrorState('')
         setLoadState(true)
-        shortUrlHash()
+        customURL ? setShortUrl(customURL) : shortUrlHash()
       }
     } catch (error) {
       setErrorState(error.message);
@@ -58,6 +58,10 @@ const App = () => {
       }
       setShortUrl(shortUrl)
   }
+
+  useEffect(() => {
+    setShortUrl(customURL || shortUrlHash())
+  }, [customURL]);
 
   return (
     <AppWrapper>
