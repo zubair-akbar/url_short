@@ -43,7 +43,11 @@ const App = () => {
   }
 
   const handleToggleMoreOptions = () => {
-    setShowMoreOptions(!showMoreOptions);
+    try {
+      setShowMoreOptions(!showMoreOptions);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const shortUrlHash = () => {
@@ -62,7 +66,7 @@ const App = () => {
           <form onSubmit={handleSubmit}>
             <label>Enter your original URL here:</label>
             <Input type='text' name="originalUrlElement"></Input>
-            <Button onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</Button>
+            <Button type='button' onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</Button>
             <br/>
             {showMoreOptions && (
               <React.Fragment>
