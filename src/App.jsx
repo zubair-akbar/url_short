@@ -60,6 +60,33 @@ const App = () => {
       setShortUrl(shortUrl);
   };
 
+  //Pending route setup in server/index.js
+  const fetchShortUrl = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          originalUrl,
+          customURL
+        })
+      });
+
+      if (response.ok) {
+        const { shortUrl } = await response.json();
+        setShortUrl(shortUrl);
+        setLoadState(true);
+        setErrorState('');
+      } else {
+        throw new Error('Failed to generate short URL');
+      }
+    } catch (error) {
+      setErrorState(error.message);
+    }
+  }
+
   useEffect(() => {
     if (customURL) {
       setShortUrl(customURL);
