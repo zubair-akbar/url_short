@@ -1,4 +1,5 @@
 import Url from '../model/model.js'
+import fetch from 'fetch';
 
 export const postUrl = async (req, res) => {
   const url = new Url(req.body);
