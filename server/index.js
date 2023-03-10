@@ -13,6 +13,7 @@ app.get('/short_url/urls', function(req, res) {
   res.status(200).send('routing through URL');
 });
 
+//Link to fetchShortUrl() in App.jsx
 app.post('/short_url/urls', function(req, res) {
   res.status(200).send('routing through URL');
 });

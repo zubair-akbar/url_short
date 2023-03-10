@@ -10,23 +10,19 @@ export const Nav = () => {
             <li>
               <a href="/">GitHub</a>
             </li>
-
             <li>
               <a href="/">Pricing</a>
             </li>
           </ul>
         </NavListContainer>
-
         <NavButtonContainer>
           <ul>
             <li>
               <a href="/">Login</a>
             </li>
-
             <li>
               <a href="/">Sign up</a>
             </li>
-
           </ul>
         </NavButtonContainer>
       </NavContainer>
@@ -54,22 +50,18 @@ max-width: 1200px;
 const NavListContainer = styled.div`
 display: flex;
 align-items: center;
-
 ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-
   li {
     margin-right: 30px;
     font-size: 18px;
-
     a {
       color: #46351D;
       text-decoration: none;
       transition: color 0.2s ease-in-out;
-
       &:hover {
         color: #58ACFA;
       }
@@ -81,34 +73,28 @@ ul {
 const NavButtonContainer = styled.div`
 display: flex;
 align-items: center;
-
 ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-
   li {
     margin-right: 30px;
     font-size: 18px;
-
     a {
       color: #46351D;
       text-decoration: none;
       transition: color 0.2s ease-in-out;
-
       &:hover {
         color: #58ACFA;
       }
     }
-
     .box-visible {
       background-color: #46351D;
       color: #fff;
       padding: 5px;
       border-radius: 3px;
     }
-
     i {
       color: #46351D;
       font-size: 24px;

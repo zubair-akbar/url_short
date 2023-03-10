@@ -24,6 +24,7 @@ const App = () => {
       if (!urlPattern.test(e.target.originalUrlElement.value)) {
         throw new Error("Oops, that link didn't work. Did you try starting from 'www.....'?");
       } else {
+        //Replace with fetchShortUrl()
         setErrorState('')
         setLoadState(true)
         customURL ? setShortUrl(customURL) : shortUrlHash()
