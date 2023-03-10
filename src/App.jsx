@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import React, { useState, useEffect } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
+import { Nav } from './Components/Navbar'
 
 const App = () => {
 
-  const [originalUrl, setOriginalUrl] = useState('')
-  const [customURL, setCustomURL] = useState('')
+  const [originalUrl, setOriginalUrl] = useState('');
+  const [customURL, setCustomURL] = useState('');
   const [loadState, setLoadState] = useState(false);
-  const [shortUrl, setShortUrl] = useState('')
-  const [errorState, setErrorState] = useState('')
+  const [shortUrl, setShortUrl] = useState('');
+  const [errorState, setErrorState] = useState('');
   const [buttonText, setButtonText] = useState('Copy');
   const [showMoreOptions, setShowMoreOptions] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setOriginalUrl(e.target.originalUrlElement.value)
     if (e.target.customUrlElement && e.target.customUrlElement.value) {
       setCustomURL(e.target.customUrlElement.value);
@@ -48,7 +49,7 @@ const App = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   const shortUrlHash = () => {
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -56,43 +57,53 @@ const App = () => {
       for (let i = 0; i < 6; i++) {
         shortUrl += chars.charAt(Math.floor(Math.random() * chars.length));
       }
-      setShortUrl(shortUrl)
-  }
+      setShortUrl(shortUrl);
+  };
 
   useEffect(() => {
-    setShortUrl(customURL || shortUrlHash())
+    if (customURL) {
+      setShortUrl(customURL);
+    } else {
+      setShortUrl(shortUrlHash());
+    }
   }, [customURL]);
 
   return (
     <AppWrapper>
     <GlobalStyle />
+    <Nav/>
+    <AppHead>
       <h1>LinkDwarf</h1>
-          <form onSubmit={handleSubmit}>
-            <label>Enter your original URL here:</label>
-            <Input type='text' name="originalUrlElement"></Input>
-            <Button type='button' onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</Button>
-            <br/>
-            {showMoreOptions && (
-              <React.Fragment>
-              <label>Try your own custom (+6 character) parameters! </label>
-              <Input type='text' name='customUrlElement'></Input>
-              </React.Fragment>
-            )}
-            <br/>
-            <Button type="submit">Submit</Button>
-          </form>
-          {errorState && (
-            <div className="error">{errorState}</div>
+      <p>The quick and easy way to shorten your URLs. Create custom, memorable links or generate random hashes with just a few clicks. Share your links easily and efficiently! <br/>Try it now!</p>
+      </AppHead>
+      <AppBody>
+        <form onSubmit={handleSubmit}>
+          <label>Enter your original URL here:</label>
+          <Input type='text' name="originalUrlElement"></Input>
+          <Button type='button' onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</Button>
+          <br/>
+          {showMoreOptions && (
+            <React.Fragment>
+            <label>Try your own custom (+6 character) parameters! </label>
+            <Input type='text' name='customUrlElement'></Input>
+            </React.Fragment>
           )}
-          {loadState && !errorState &&
-            <div>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
-            <Button onClick={handleCopy}>{buttonText}</Button><br/>
-            ✧♡(◕‿◕✿)
-            </div>
-          }
+          <br/>
+          <Button type="submit">Submit</Button>
+        </form>
+        {errorState && (
+          <div className="error">{errorState}</div>
+        )}
+        {loadState && !errorState &&
+          <div>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
+          <Button onClick={handleCopy}>{buttonText}</Button><br/>
+          ✧♡(◕‿◕✿)
+          </div>
+        }
+        </AppBody>
     </AppWrapper>
   )
-}
+};
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -108,15 +119,28 @@ const AppWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   align-content: center;
-  gap: 50px;
+  //gap: 10px;
   text-align: center;
   border: solid;
-  //border-color: orange;
-  margin: auto;
+  //margin: auto;
   padding-bottom: 20px;
   color: #46351D;
-  background-color: #AABA9E;
+  background-color: #76826d;
   height: 100vh;
+  //border-color: orange;
+`;
+
+const AppHead = styled.div`
+  background: linear-gradient(to bottom, #AABA9E, #76826d);
+  //flex-shrink: 0; /* don't shrink */
+  width: 100%;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+`
+
+const AppBody = styled.div`
+  background-color: #76826d;
+  //flex-shrink: 1; /* don't shrink */;
+  margin-top: 100px;
 `;
 
 const Button = styled.button`
@@ -145,7 +169,4 @@ const Input = styled.input`
   border-radius: 60px;
 `;
 
-
-
-
-export default App
+export default App;
