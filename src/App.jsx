@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Nav } from './Components/Navbar'
 import { SocialShare } from './Components/SocialShare'
+import { AppFooter } from './Components/AppFooter'
 
 const App = () => {
 
@@ -109,7 +110,7 @@ const App = () => {
         <form onSubmit={handleSubmit}>
           <label>Enter your original URL here:</label>
           <Input type='text' name="originalUrlElement"></Input>
-          <Button type='button' onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</Button>
+          <SecondaryButton onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</SecondaryButton>
           <br/>
           {showMoreOptions && (
             <React.Fragment>
@@ -125,12 +126,13 @@ const App = () => {
         )}
         {loadState && !errorState &&
           <div style={{fontWeight: 'bold'}}>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
-          <Button onClick={handleCopy}>{buttonText}</Button><br/>
+          <SecondaryButton onClick={handleCopy}>{buttonText}</SecondaryButton><br/>
           ✧♡(◕‿◕✿)
           <SocialShare url={`linkdwarf/${shortUrl}`} />
           </div>
         }
         </AppBody>
+        <AppFooter/>
     </AppWrapper>
   )
 };
@@ -139,6 +141,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Alegreya', serif;
     font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
   }
   `;
 
@@ -183,8 +187,15 @@ const Button = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  cursor: pointer;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: #939e8a;
+  }
+  &:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+    outline: 0;
+  }
 
   /* &:hover {
     background: linear-gradient(to bottom, #885944, #6f463a);
@@ -195,6 +206,25 @@ const Button = styled.button`
     outline: 0;
   }
 `;
+
+const SecondaryButton = styled.button`
+  padding: 10px;
+  margin: 10px;
+  background: #586151;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: #939e8a;
+  }
+  &:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+    outline: 0;
+  }
+`;
+
 
 const Input = styled.input`
   background: #ecf0f3;
