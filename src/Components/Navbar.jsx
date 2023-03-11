@@ -35,7 +35,10 @@ background-color: white;
 height: 25px;
 display: flex;
 justify-content: center;
-width: 100%
+width: 100%;
+border-bottom: solid;
+border-width: 1px;
+font-weight: bold;
 `;
 
 const NavContainer = styled.div`
