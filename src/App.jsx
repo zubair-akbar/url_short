@@ -139,7 +139,7 @@ const App = () => {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: 'Alegreya', serif;
+    font-family: serif, 'Alegreya';
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -147,7 +147,7 @@ const GlobalStyle = createGlobalStyle`
   `;
 
 const AppWrapper = styled.div`
-  font-family: 'Montserrat', sans-serif;
+  font-family: sans-serif, 'Montserrat';
   display: flex;
   flex-flow: column wrap;
   justify-content: flex-start;
@@ -178,6 +178,7 @@ const AppBody = styled.div`
 `;
 
 const Button = styled.button`
+  font-family: sans-serif, 'Montserrat';
   padding: 6px 14px;
   border-radius: 6px;
   border: none;
@@ -208,6 +209,7 @@ const Button = styled.button`
 `;
 
 const SecondaryButton = styled.button`
+  font-family: sans-serif, 'Montserrat';
   padding: 10px;
   margin: 10px;
   background: #586151;
@@ -227,6 +229,7 @@ const SecondaryButton = styled.button`
 
 
 const Input = styled.input`
+  font-family: sans-serif, 'Montserrat';
   background: #ecf0f3;
   padding: 9px;
   margin: 5px;
