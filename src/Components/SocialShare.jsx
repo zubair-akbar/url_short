@@ -45,4 +45,4 @@ const SocialShareButton = styled.button`
   }
 `;
 
-export default SocialShare;
+export default React.memo(SocialShare);
