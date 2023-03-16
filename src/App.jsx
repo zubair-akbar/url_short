@@ -105,37 +105,45 @@ const App = () => {
   }, [customURL]);
 
   return (
-    <AppWrapper data-theme={theme === 'night' ? 'night' : 'default'}>
+    <AppWrapper
+      data-theme={theme === 'night' ? 'night' : 'default'}>
     <GlobalStyle />
-    <Nav/>
-    <button onClick={toggleTheme}>
-      {theme === 'default' ? 'Night Mode' : 'Default Mode'}
-    </button>
+    <Nav
+      theme={theme}
+    />
     <AppHead>
+      <ToggleThemeButton
+        onClick={toggleTheme}>
+          {theme === 'default' ? 'Night Mode' : 'Default Mode'}
+      </ToggleThemeButton>
       <h1>Link<span style={{ fontSize: '0.4em', fontStyle: "oblique" }}>Dwarf</span></h1>
-      <p>The quick and easy way to shorten your URLs. Create custom, memorable links or generate random hashes with just a few clicks. Share your links easily and efficiently! <br/>Try it now!</p>
-      </AppHead>
+      <p>Effortlessly shorten your URLs. Craft custom, memorable links or generate random hashes in an instant. Share your links seamlessly.<br/>Give it a try now!</p>
+    </AppHead>
       <AppBody>
         <StyledForm onSubmit={handleSubmit}>
           <label>Enter your original URL here:</label>
           <Input type='text' name="originalUrlElement"></Input>
-          <SecondaryButton onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</SecondaryButton>
-          <br/>
+          <MoreOptionsButton
+            type='button'
+            onClick={handleToggleMoreOptions}>
+              {showMoreOptions ? 'Less Options' : 'More Options'}
+          </MoreOptionsButton>
+            <br/>
           {showMoreOptions && (
             <React.Fragment>
             <label>Try your own custom (+6 character) parameters! </label>
             <Input type='text' name='customUrlElement'></Input>
             </React.Fragment>
           )}
-          <br/>
+            <br/>
           <Button type="submit">Submit</Button>
         </StyledForm>
         {errorState && (
-          <div className="error">{errorState}</div>
+          <ErrorDiv className="error">{errorState}</ErrorDiv>
         )}
         {loadState && !errorState &&
           <div style={{fontWeight: 'bold'}}>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
-          <SecondaryButton onClick={handleCopy}>{buttonText}</SecondaryButton><br/>
+          <MoreOptionsButton onClick={handleCopy}>{buttonText}</MoreOptionsButton><br/>
           ✧♡(◕‿◕✿)
           <SocialShare url={`linkdwarf/${shortUrl}`} />
           </div>
@@ -155,6 +163,9 @@ const GlobalStyle = createGlobalStyle`
     --button-gradient-end: #c48f60;
     --button-hover: #939e8a;
     --text-color: #46351D;
+    --nav-bg-color: white;
+    --nav-link-color: #46351D;
+    --nav-link-hover-color: #58ACFA;
   }
 
   [data-theme="night"] {
@@ -165,6 +176,9 @@ const GlobalStyle = createGlobalStyle`
     --button-gradient-end: #778DA3;
     --button-hover: #4e5a68;
     --text-color: #E6E6E6;
+    --nav-bg-color: #1f2f3d;
+    --nav-link-color: #E6E6E6;
+    --nav-link-hover-color: #58ACFA;
   }
 
   body {
@@ -251,7 +265,7 @@ const StyledForm = styled.form`
   background-color: var(--background-color);
 `
 
-const SecondaryButton = styled.button`
+const MoreOptionsButton = styled.button`
   font-family: 'Montserrat', sans-serif;
   padding: 10px;
   margin: 10px;
@@ -279,6 +293,32 @@ const Input = styled.input`
   height: 5px;
   font-size: 14px;
   border-radius: 60px;
+`;
+
+const ToggleThemeButton = styled.button`
+  font-family: 'Montserrat', sans-serif;
+  position: absolute;
+  top: 25px;
+  right: 10px;
+  padding: 10px;
+  margin: 10px;
+  background: var(--button-hover);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: var(--button-hover);
+  }
+  &:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+    outline: 0;
+  }
+`;
+
+const ErrorDiv = styled.div`
+  background-color: var(--background-color);
 `;
 
 export default App;
