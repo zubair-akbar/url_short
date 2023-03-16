@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-export const Nav = () => {
+export const Nav = ({ theme }) => {
 
   return (
-    <NavWrapper>
+    <NavWrapper
+      data-theme={theme === 'night' ? 'night' : 'default'}
+    >
       <NavContainer>
         <NavListContainer>
           <ul>
@@ -39,6 +41,7 @@ width: 100%;
 border-bottom: solid;
 border-width: 1px;
 font-weight: bold;
+background-color: var(--nav-bg-color);
 `;
 
 const NavContainer = styled.div`
@@ -62,12 +65,12 @@ ul {
     margin-right: 30px;
     font-size: 18px;
     a {
-      color: #46351D;
+      color: var(--nav-link-color);
       text-decoration: none;
       transition: color 0.2s ease-in-out;
       &:hover {
-        color: #58ACFA;
-      }
+      color: var(--nav-link-hover-color);
+    }
     }
   }
 }
@@ -85,7 +88,7 @@ ul {
     margin-right: 30px;
     font-size: 18px;
     a {
-      color: #46351D;
+      color: var(--nav-link-color);
       text-decoration: none;
       transition: color 0.2s ease-in-out;
       &:hover {
