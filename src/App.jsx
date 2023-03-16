@@ -142,11 +142,12 @@ const App = () => {
           <ErrorDiv className="error">{errorState}</ErrorDiv>
         )}
         {loadState && !errorState &&
-          <div style={{fontWeight: 'bold'}}>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
+          <SuccessDiv style={{fontWeight: 'bold'}}>Your custom URL is <a href={'linkdwarf/' +shortUrl}>{'linkdwarf/' +shortUrl} </a>
           <MoreOptionsButton onClick={handleCopy}>{buttonText}</MoreOptionsButton><br/>
           ✧♡(◕‿◕✿)
-          <SocialShare url={`linkdwarf/${shortUrl}`} />
-          </div>
+          <SocialShare theme={{theme}}
+            url={`linkdwarf/${shortUrl}`} />
+          </SuccessDiv>
         }
         </AppBody>
         <AppFooter/>
@@ -318,6 +319,10 @@ const ToggleThemeButton = styled.button`
 `;
 
 const ErrorDiv = styled.div`
+  background-color: var(--background-color);
+`;
+
+const SuccessDiv = styled.div`
   background-color: var(--background-color);
 `;
 
