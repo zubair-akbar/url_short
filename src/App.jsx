@@ -13,6 +13,8 @@ const App = () => {
   const [errorState, setErrorState] = useState('');
   const [buttonText, setButtonText] = useState('Copy');
   const [showMoreOptions, setShowMoreOptions] = useState(false);
+  const [theme, setTheme] = useState('default');
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,6 +55,10 @@ const App = () => {
       console.error(error);
     }
   }
+
+  const toggleTheme = () => {
+    setTheme(theme === 'default' ? 'night' : 'default');
+  };
 
   const shortUrlHash = () => {
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -99,15 +105,18 @@ const App = () => {
   }, [customURL]);
 
   return (
-    <AppWrapper>
+    <AppWrapper data-theme={theme === 'night' ? 'night' : 'default'}>
     <GlobalStyle />
     <Nav/>
+    <button onClick={toggleTheme}>
+      {theme === 'default' ? 'Night Mode' : 'Default Mode'}
+    </button>
     <AppHead>
-      <h1>LinkDwarf</h1>
+      <h1>Link<span style={{ fontSize: '0.4em', fontStyle: "oblique" }}>Dwarf</span></h1>
       <p>The quick and easy way to shorten your URLs. Create custom, memorable links or generate random hashes with just a few clicks. Share your links easily and efficiently! <br/>Try it now!</p>
       </AppHead>
       <AppBody>
-        <form onSubmit={handleSubmit}>
+        <StyledForm onSubmit={handleSubmit}>
           <label>Enter your original URL here:</label>
           <Input type='text' name="originalUrlElement"></Input>
           <SecondaryButton onClick={handleToggleMoreOptions}>{showMoreOptions ? 'Less Options' : 'More Options'}</SecondaryButton>
@@ -120,7 +129,7 @@ const App = () => {
           )}
           <br/>
           <Button type="submit">Submit</Button>
-        </form>
+        </StyledForm>
         {errorState && (
           <div className="error">{errorState}</div>
         )}
@@ -138,8 +147,27 @@ const App = () => {
 };
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --background-color: #76826d;
+    --gradient-start: #AABA9E;
+    --gradient-end: #76826d;
+    --button-gradient-start: #926444;
+    --button-gradient-end: #c48f60;
+    --button-hover: #939e8a;
+    --text-color: #46351D;
+  }
+
+  [data-theme="night"] {
+    --background-color: #243447;
+    --gradient-start: #435A6F;
+    --gradient-end: #243447;
+    --button-gradient-start: #576B86;
+    --button-gradient-end: #778DA3;
+    --button-hover: #4e5a68;
+    --text-color: #E6E6E6;
+  }
+
   body {
-    font-family: serif, 'Alegreya';
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -147,7 +175,6 @@ const GlobalStyle = createGlobalStyle`
   `;
 
 const AppWrapper = styled.div`
-  font-family: sans-serif, 'Montserrat';
   display: flex;
   flex-flow: column wrap;
   justify-content: flex-start;
@@ -158,17 +185,28 @@ const AppWrapper = styled.div`
   border: solid;
   //margin: auto;
   padding-bottom: 20px;
-  color: #46351D;
-  background-color: #76826d;
+  color: var(--text-color);
+  background-color: var(--background-color);
   height: 100vh;
   //border-color: orange;
 `;
 
 const AppHead = styled.div`
-  background: linear-gradient(to bottom, #AABA9E, #76826d);
+  background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
   //flex-shrink: 0; /* don't shrink */
   width: 100%;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 75px;
+    margin-bottom: 1px;
+    color: var(--text-color);
+  }
+
+  p {
+    margin-top: 1px;
+  }
+
 `
 
 const AppBody = styled.div`
@@ -178,11 +216,11 @@ const AppBody = styled.div`
 `;
 
 const Button = styled.button`
-  font-family: sans-serif, 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   padding: 6px 14px;
   border-radius: 6px;
   border: none;
-  background: linear-gradient(to bottom, #926444, #c48f60);
+  background: linear-gradient(to bottom, var(--button-gradient-start), var(--button-gradient-end));
   margin: 5px;
   color: #DFDEDF;
   user-select: none;
@@ -191,7 +229,7 @@ const Button = styled.button`
     cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: #939e8a;
+    background-color: var(--button-hover);
   }
   &:focus {
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
@@ -208,18 +246,23 @@ const Button = styled.button`
   }
 `;
 
+const StyledForm = styled.form`
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--background-color);
+`
+
 const SecondaryButton = styled.button`
-  font-family: sans-serif, 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   padding: 10px;
   margin: 10px;
-  background: #586151;
+  background: var(--button-hover);
   border: none;
   border-radius: 10px;
   color: #fff;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: #939e8a;
+    background-color: var(--button-hover);
   }
   &:focus {
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
@@ -229,7 +272,7 @@ const SecondaryButton = styled.button`
 
 
 const Input = styled.input`
-  font-family: sans-serif, 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   background: #ecf0f3;
   padding: 9px;
   margin: 5px;
