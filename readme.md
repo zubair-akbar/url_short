@@ -3,6 +3,11 @@
 </h1>
 
 <div align="center">
+  <img src="image-url-1" alt="Landing Page - Light Mode" width="45%" style="margin-right: 10px;">
+  <img src="image-url-2" alt="Landing Page - Night Mode" width="45%">
+</div>
+
+<div align="center">
 
 [![Latest release](https://img.shields.io/github/v/release/zubair-akbar/url_short?label=Latest%20release&style=social)](https://github.com/zubair-akbar/url_short/releases)
 [![Stars](https://img.shields.io/github/stars/zubair-akbar/url_short?style=social)](https://github.com/zubair-akbar/url_short/stargazers)
