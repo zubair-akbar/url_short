@@ -9,7 +9,6 @@
 
 <div align="center">
 
-[![Latest release](https://img.shields.io/github/v/release/zubair-akbar/url_short?label=Latest%20release&style=social)](https://github.com/zubair-akbar/url_short/releases)
 [![Stars](https://img.shields.io/github/stars/zubair-akbar/url_short?style=social)](https://github.com/zubair-akbar/url_short/stargazers)
 [![Fork](https://img.shields.io/github/forks/zubair-akbar/url_short?style=social)](https://github.com/zubair-akbar/url_short/network/members)
 [![Watchers](https://img.shields.io/github/watchers/zubair-akbar/url_short?style=social)](https://github.com/zubair-akbar/url_short/watchers)
