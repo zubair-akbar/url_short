@@ -3,8 +3,8 @@
 </h1>
 
 <div align="center">
-  <img src="image-url-1" alt="Landing Page - Light Mode" width="45%" style="margin-right: 10px;">
-  <img src="image-url-2" alt="Landing Page - Night Mode" width="45%">
+  <img src="https://github.com/zubair-akbar/url_short/blob/main/Screenshot%202023-03-16%20231837.jpg" alt="Landing Page - Light Mode" width="45%" style="margin-right: 10px;">
+  <img src="https://github.com/zubair-akbar/url_short/blob/main/Screenshot%202023-03-16%20231848.jpg" alt="Landing Page - Night Mode" width="45%">
 </div>
 
 <div align="center">
